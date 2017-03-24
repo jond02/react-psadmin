@@ -5,7 +5,7 @@ var AuthorsApi = require('../../api/author-api');
 var AuthorList = require('./author-list');
 
 //smart component, gets the data and passes to author list
-var Authors = React.createClass({
+var AuthorPage = React.createClass({
 
     getInitialState: function(){
 
@@ -32,4 +32,4 @@ var Authors = React.createClass({
     }
 });
 
-module.exports = Authors;
+module.exports = AuthorPage;

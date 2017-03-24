@@ -46306,8 +46306,13 @@ module.exports = About;
 
 var React = require('react');
 
-//dump component, gets data passed down to it
+//dumb component, gets data passed down to it
 var AuthorList = React.createClass({displayName: "AuthorList",
+
+    //declare expectations for a given component
+    propTypes: {
+        authors: React.PropTypes.array.isRequired
+    },
 
     render: function(){
 
@@ -46334,7 +46339,6 @@ var AuthorList = React.createClass({displayName: "AuthorList",
             )
         );
     }
-
 });
 
 module.exports = AuthorList;
@@ -46347,7 +46351,7 @@ var AuthorsApi = require('../../api/author-api');
 var AuthorList = require('./author-list');
 
 //smart component, gets the data and passes to author list
-var Authors = React.createClass({displayName: "Authors",
+var AuthorPage = React.createClass({displayName: "AuthorPage",
 
     getInitialState: function(){
 
@@ -46374,7 +46378,7 @@ var Authors = React.createClass({displayName: "Authors",
     }
 });
 
-module.exports = Authors;
+module.exports = AuthorPage;
 
 },{"../../api/author-api":159,"./author-list":162,"react":158}],164:[function(require,module,exports){
 "use strict";

@@ -2,8 +2,13 @@
 
 var React = require('react');
 
-//dump component, gets data passed down to it
+//dumb component, gets data passed down to it
 var AuthorList = React.createClass({
+
+    //declare expectations for a given component
+    propTypes: {
+        authors: React.PropTypes.array.isRequired
+    },
 
     render: function(){
 
@@ -30,7 +35,6 @@ var AuthorList = React.createClass({
             </div>
         );
     }
-
 });
 
 module.exports = AuthorList;
