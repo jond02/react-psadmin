@@ -3,6 +3,8 @@
 var React = require('react');
 var AuthorsApi = require('../../api/author-api');
 var AuthorList = require('./author-list');
+var Router = require('react-router');
+var Link = Router.Link;
 
 //smart component, gets the data and passes to author list
 var AuthorPage = React.createClass({
@@ -26,6 +28,7 @@ var AuthorPage = React.createClass({
         return (
             <div>
                 <h1>Authors</h1>
+                <Link to="addAuthor" className="btn btn-default" >Add Author</Link>
                 <AuthorList authors={this.state.authors} />
             </div>
         );
