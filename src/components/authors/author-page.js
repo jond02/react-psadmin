@@ -2,51 +2,34 @@
 
 var React = require('react');
 var AuthorsApi = require('../../api/author-api');
+var AuthorList = require('./author-list');
 
+//smart component, gets the data and passes to author list
 var Authors = React.createClass({
 
     getInitialState: function(){
 
         return {
-            authors : []
+            authors: []
         };
-
     },
 
-    componentWillMount: function(){
-
-        this.setState({ authors: AuthorsApi.getAllAuthors() });
-
+    componentDidMount: function(){
+        if (this.isMounted()){
+            this.setState({ authors: AuthorsApi.getAllAuthors() });
+        }
     },
 
     render: function(){
 
-        var createAuthorRow = function(author){
-            return (
-                <tr key={author.id}>
-                    <td><a href={"/#authors/" + author.id}>{author.id}</a></td>
-                    <td>{author.firstName} {author.lastName}</td>
-                </tr>
-            );
-        };
-
+        //authors property is set on authors list
         return (
             <div>
                 <h1>Authors</h1>
-
-                <table className="table">
-                    <thead>
-                        <th>ID</th>
-                        <th>Name</th>
-                    </thead>
-                    <tbody>
-                        {this.state.authors.map(createAuthorRow, this)}
-                    </tbody>
-                </table>
+                <AuthorList authors={this.state.authors} />
             </div>
         );
     }
-
 });
 
 module.exports = Authors;

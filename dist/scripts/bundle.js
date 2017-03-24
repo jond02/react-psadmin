@@ -46305,23 +46305,9 @@ module.exports = About;
 "use strict";
 
 var React = require('react');
-var AuthorsApi = require('../../api/author-api');
 
-var Authors = React.createClass({displayName: "Authors",
-
-    getInitialState: function(){
-
-        return {
-            authors : []
-        };
-
-    },
-
-    componentWillMount: function(){
-
-        this.setState({ authors: AuthorsApi.getAllAuthors() });
-
-    },
+//dump component, gets data passed down to it
+var AuthorList = React.createClass({displayName: "AuthorList",
 
     render: function(){
 
@@ -46336,15 +46322,13 @@ var Authors = React.createClass({displayName: "Authors",
 
         return (
             React.createElement("div", null, 
-                React.createElement("h1", null, "Authors"), 
-
                 React.createElement("table", {className: "table"}, 
                     React.createElement("thead", null, 
-                        React.createElement("th", null, "ID"), 
-                        React.createElement("th", null, "Name")
+                    React.createElement("th", null, "ID"), 
+                    React.createElement("th", null, "Name")
                     ), 
                     React.createElement("tbody", null, 
-                        this.state.authors.map(createAuthorRow, this)
+                        this.props.authors.map(createAuthorRow, this)
                     )
                 )
             )
@@ -46353,9 +46337,46 @@ var Authors = React.createClass({displayName: "Authors",
 
 });
 
+module.exports = AuthorList;
+
+},{"react":158}],163:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var AuthorsApi = require('../../api/author-api');
+var AuthorList = require('./author-list');
+
+//smart component, gets the data and passes to author list
+var Authors = React.createClass({displayName: "Authors",
+
+    getInitialState: function(){
+
+        return {
+            authors: []
+        };
+    },
+
+    componentDidMount: function(){
+        if (this.isMounted()){
+            this.setState({ authors: AuthorsApi.getAllAuthors() });
+        }
+    },
+
+    render: function(){
+
+        //authors property is set on authors list
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", null, "Authors"), 
+                React.createElement(AuthorList, {authors: this.state.authors})
+            )
+        );
+    }
+});
+
 module.exports = Authors;
 
-},{"../../api/author-api":159,"react":158}],163:[function(require,module,exports){
+},{"../../api/author-api":159,"./author-list":162,"react":158}],164:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -46381,7 +46402,7 @@ var Header = React.createClass({displayName: "Header",
 
 module.exports = Header;
 
-},{"react":158}],164:[function(require,module,exports){
+},{"react":158}],165:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -46399,7 +46420,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":158}],165:[function(require,module,exports){
+},{"react":158}],166:[function(require,module,exports){
 
 $ = jQuery = require('jquery');
 var React = require('react');
@@ -46442,4 +46463,4 @@ var Header = require('./components/common/header');
 
 })(window);
 
-},{"./components/about/about-page":161,"./components/authors/author-page":162,"./components/common/header":163,"./components/home-page":164,"jquery":1,"react":158}]},{},[165]);
+},{"./components/about/about-page":161,"./components/authors/author-page":163,"./components/common/header":164,"./components/home-page":165,"jquery":1,"react":158}]},{},[166]);
