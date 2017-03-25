@@ -31,6 +31,16 @@ var ManageAuthorPage = React.createClass({
             dirty: false
         };
     },
+
+    componentWillMount: function(){
+
+        //rendering function won't fire twice if done here instead of componentDidMount
+        var authorId = this.props.params.id; //from the path /author/id
+
+        if (authorId){
+            this.setState({author: AuthorApi.getAuthorById(authorId)});
+        }
+    },
     setAuthorState: function(event){
 
         //called every keypress in form to update state
