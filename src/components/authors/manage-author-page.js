@@ -7,6 +7,7 @@ var AuthorApi = require('../../api/author-api');
 var toastr = require('toastr');
 
 //controller view
+//control data flow down to all child components
 //top level components are best place to handle state
 var ManageAuthorPage = React.createClass({
 
@@ -31,9 +32,9 @@ var ManageAuthorPage = React.createClass({
             dirty: false
         };
     },
-
     componentWillMount: function(){
 
+        //runs before rendering
         //rendering function won't fire twice if done here instead of componentDidMount
         var authorId = this.props.params.id; //from the path /author/id
 
